@@ -1,0 +1,3 @@
+cd ../qr_phishing
+composer require endroid/qr-code  # Install QR library
+php -S localhost:8000     # JALANKAN web server QR
