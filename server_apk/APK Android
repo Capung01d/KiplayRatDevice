@@ -1,0 +1,2 @@
+cd ../server_apk
+./gradlew assembleDebug  # BUILD APK file (.apk)
