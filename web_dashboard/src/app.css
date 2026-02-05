@@ -1,0 +1,65 @@
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.stats {
+  background: var(--glass);
+  padding: 15px 30px;
+  border-radius: 50px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.devices-panel, .control-panel {
+  background: var(--glass);
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid var(--glass-dark);
+}
+
+.device {
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: rgba(255,255,255,0.1);
+}
+
+.device:hover, .device.online {
+  background: linear-gradient(45deg, rgba(40,167,69,0.3), rgba(40,167,69,0.2));
+  transform: translateX(10px);
+}
+
+.commands {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.commands button {
+  height: 60px;
+  font-size: 14px;
+  border-radius: 12px;
+}
+
+.danger {
+  background: linear-gradient(45deg, #dc3545, #fd7e14) !important;
+  grid-column: 1 / -1;
+}
